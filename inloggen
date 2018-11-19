@@ -1,0 +1,147 @@
+package main
+
+import (
+	"database/sql"
+	"fmt"
+	"net/http"
+
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/gorilla/mux"
+	"github.com/gorilla/securecookie"
+)
+
+// Verbinding maken met de database Vita Intellectus
+func dbConn() (db *sql.DB) {
+	dbDriver := "mysql"
+	dbUser := "root"
+	dbPass := "vita"
+	dbName := "vitaintellectdb"
+	db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@/"+dbName)
+	if err != nil {
+		panic(err.Error())
+	}
+	return db
+}
+
+// cookie handling
+var cookieHandler = securecookie.New(
+	securecookie.GenerateRandomKey(64),
+	securecookie.GenerateRandomKey(32))
+
+func getUserName(request *http.Request) (userName string) {
+	if cookie, err := request.Cookie("session"); err == nil {
+		cookieValue := make(map[string]string)
+		if err = cookieHandler.Decode("session", cookie.Value, &cookieValue); err == nil {
+			userName = cookieValue["name"]
+		}
+	}
+	return userName
+}
+
+func setSession(userName string, response http.ResponseWriter) {
+	value := map[string]string{
+		"name": userName,
+	}
+	if encoded, err := cookieHandler.Encode("session", value); err == nil {
+		cookie := &http.Cookie{
+			Name:  "session",
+			Value: encoded,
+			Path:  "/",
+		}
+		http.SetCookie(response, cookie)
+	}
+}
+
+func clearSession(response http.ResponseWriter) {
+	cookie := &http.Cookie{
+		Name:   "session",
+		Value:  "",
+		Path:   "/",
+		MaxAge: -1,
+	}
+	http.SetCookie(response, cookie)
+}
+
+// login handler
+func loginHandler(response http.ResponseWriter, request *http.Request) {
+	db := dbConn()
+
+	username := request.FormValue("username")
+	pass := request.FormValue("password")
+
+	var databaseUsername string
+	var databasePassword string
+
+	err := db.QueryRow("SELECT voorletters, datum_in_dienst FROM medewerker WHERE voorletters=?", username).Scan(&databaseUsername, &databasePassword)
+
+	if err != nil {
+		http.Redirect(response, request, "/login", 301)
+		return
+	}
+
+	redirectTarget := "/"
+	if username != "" && pass != "" {
+		// .. check credentials ..
+		setSession(username, response)
+		redirectTarget = "/internal"
+	}
+	http.Redirect(response, request, redirectTarget, 302)
+}
+
+// logout handler
+func logoutHandler(response http.ResponseWriter, request *http.Request) {
+	clearSession(response)
+	http.Redirect(response, request, "/", 302)
+}
+
+// index page
+const indexPage = `
+<h1>Inloggen</h1>
+<form method="post" action="/login">
+    <label for="username">Gebruikersnaam</label>
+    <input type="text" id="username" name="username" placeholder="gebruikersnaam">
+    <label for="password">Wachtwoord</label>
+    <input type="password" id="password" name="password" placeholder="wachtwoord">
+    <button type="submit">Inloggen</button>
+</form>
+`
+
+func indexPageHandler(response http.ResponseWriter, request *http.Request) {
+	fmt.Fprintf(response, indexPage)
+}
+
+// internal page
+const internalPage = `
+
+<h1>Venditor: Vita Intellectus</h1>
+
+<hr>
+<small>Gebruiker: %s</small>
+<form method="post" action="/logout">
+    <button type="submit">Uitloggen</button>
+</form>
+`
+
+func internalPageHandler(response http.ResponseWriter, request *http.Request) {
+	userName := getUserName(request)
+	if userName != "" {
+		fmt.Fprintf(response, internalPage, userName)
+
+	} else {
+		http.Redirect(response, request, "/", 302)
+	}
+}
+
+// server main method
+var router = mux.NewRouter()
+
+func main() {
+
+	router.HandleFunc("/", indexPageHandler)
+	router.HandleFunc("/internal", internalPageHandler)
+	router.HandleFunc("/login", loginHandler).Methods("POST")
+	router.HandleFunc("/logout", logoutHandler).Methods("POST")
+
+	http.Handle("/", router)
+	http.ListenAndServe(":8000", nil)
+}

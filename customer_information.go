@@ -60,24 +60,8 @@ func main (){
 	fmt.Println("Address:", p1.address.street, p1.address.streetNumber)
 	fmt.Println("Country:", p1.address.country)
 	fmt.Println("Postal Code:", p1.address.postalCodeNumber, p1.address.postalCodeLetters)
-	fmt.Println("Function:", p1.work.title, "at", p1.work.company)
+	fmt.Println("Work:", p1.work.title, "at", p1.work.company)
 	fmt.Println("Work time weekly:", p1.work.workHoursWeekly, "hours")
 	fmt.Println("Experience:", p1.work.yearsExperience, "year")
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
