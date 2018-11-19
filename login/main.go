@@ -130,12 +130,12 @@ const internalPage = `<html><body>
 <form method="post" action="/logout">
     <button type="submit">Uitloggen</button>
 </form>
-{{end}}
 </body></html>
 `
 
 func internalPageHandler(response http.ResponseWriter, request *http.Request) {
 	userName := getUserName(request)
+
 	if userName != "" {
 		fmt.Fprintf(response, internalPage, userName)
 
@@ -145,51 +145,16 @@ func internalPageHandler(response http.ResponseWriter, request *http.Request) {
 }
 
 func mijnklantPageHandler(response http.ResponseWriter, request *http.Request) {
+	db := dbConn()
 	userName := getUserName(request)
+	db.Query("SELECT k.* FROM klant AS k INNER JOIN bestelling AS b ON b.klantnummer = k.klantnummer WHERE  b.verkoper = (SELECT m.medewerkernummer FROM medewerker AS m WHERE m.naam = ?)", userName)
+
 	if userName != "" {
 		fmt.Fprintf(response, mijnklantPage, userName)
 
 	} else {
 		http.Redirect(response, request, "/", 302)
 	}
-}
-
-func Index(w http.ResponseWriter, r *http.Request) {
-	db := dbConn()
-	selDB, err := db.Query("SELECT * FROM klant ORDER BY klantnummer ASC") // Selecteren en ordenen van de gegevens van de klanten
-	if err != nil {
-		panic(err.Error())
-	}
-	klnt := Klant{}
-	res := []Klant{}
-	for selDB.Next() {
-		var klantnummer, huisnummer, inkomen int
-		var naam, voornaam, postcode, huisnummer_toevoeging, geslacht, bloedgroep, rhesusfactor string
-		var geboortedatum, kredietregistratie, opleiding, opmerkingen string
-		var beroepsrisicofactor float32
-		err = selDB.Scan(&klantnummer, &voornaam, &naam, &postcode, &huisnummer, &huisnummer_toevoeging, &geboortedatum, &geslacht, &bloedgroep, &rhesusfactor, &beroepsrisicofactor, &inkomen, &kredietregistratie, &opleiding, &opmerkingen)
-		if err != nil {
-			panic(err.Error())
-		}
-		klnt.Knr = klantnummer
-		klnt.Nm = naam
-		klnt.Vnm = voornaam
-		klnt.Pc = postcode
-		klnt.Hnr = huisnummer
-		klnt.Hnrt = huisnummer_toevoeging
-		klnt.Gbd = geboortedatum
-		klnt.Gsl = geslacht
-		klnt.Blg = bloedgroep
-		klnt.Rhf = rhesusfactor
-		klnt.Brf = beroepsrisicofactor
-		klnt.Ink = inkomen
-		klnt.Krg = kredietregistratie
-		klnt.Opl = opleiding
-		klnt.Opm = opmerkingen
-		res = append(res, klnt)
-	}
-	tmpl.ExecuteTemplate(w, "Index", res)
-	defer db.Close()
 }
 
 // Pagina Mijn klanten
@@ -215,7 +180,7 @@ const mijnklantPage = `<html><body>
        </thead>
        <tbody>
       <tr>
-        <td> {{ .klantnummer}} </td>
+        <td> %s </td>
         <td> {{ .voornaam }} {{ .naam}} </td>
         <td> {{ .postcode }} {{ .huisnummer }} {{ .huisnummertoevoeging }} </td>
         <td> {{ .geboortedatum }} </td> 

@@ -2,42 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cc014dfb-3a0a-4cf2-9f1d-d82106a86edf" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bestelling/bestelling.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bestelling/form/edit.tmpl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bestelling/form/footer.tmpl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bestelling/form/header.tmpl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bestelling/form/index.tmpl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bestelling/form/menu.tmpl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bestelling/form/new.tmpl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bestelling/form/show.tmpl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/casus/SQL" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/casus/database.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/inloggen" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/klanten/form/edit.tmpl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/klanten/form/footer.tmpl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/klanten/form/header.tmpl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/klanten/form/index.tmpl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/klanten/form/menu.tmpl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/klanten/form/new.tmpl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/klanten/form/show.tmpl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/klanten/klanten" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/klanten/klanten.exe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/klanten/klanten.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/login/bestelling.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/login/klant.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/login/login" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/login/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/signup" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/studentenadministratie/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/studentenadministratie/klas.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/studentenadministratie/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/studentenadministratie/student.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/versie 4.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/customer_information.go" beforeDir="false" afterPath="$PROJECT_DIR$/customer_information.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/klanten/klanten.go" beforeDir="false" afterPath="$PROJECT_DIR$/klanten/klanten.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/login" beforeDir="false" afterPath="$PROJECT_DIR$/login/login" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/login/main.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -65,26 +32,33 @@
         <counts>
           <entry key="SQL" value="2" />
           <entry key="gitignore" value="1" />
-          <entry key="go" value="8" />
+          <entry key="go" value="15" />
+          <entry key="tmpl" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Go" value="8" />
-          <entry key="PLAIN_TEXT" value="3" />
+          <entry key="Go" value="15" />
+          <entry key="PLAIN_TEXT" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="SQL" value="642" />
           <entry key="gitignore" value="10" />
-          <entry key="go" value="1534" />
+          <entry key="go" value="1933" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Go" value="1534" />
+          <entry key="Go" value="1929" />
           <entry key="PLAIN_TEXT" value="652" />
+          <entry key="SQL" value="4" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.go.postfix.template.usages.trigger">
+        <counts>
+          <entry key=".print" value="1" />
         </counts>
       </usages-collector>
     </session>
@@ -94,8 +68,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/login/main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="116" column="16" lean-forward="true" selection-start-line="116" selection-start-column="16" selection-end-line="116" selection-end-column="16" />
+            <state relative-caret-position="95">
+              <caret line="17" column="30" selection-start-line="17" selection-start-column="15" selection-end-line="17" selection-end-column="30" />
               <folding>
                 <element signature="e#14#157#0" expanded="true" />
               </folding>
@@ -104,6 +78,36 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/klanten/klanten.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="305">
+              <caret line="161" column="1" lean-forward="true" selection-start-line="161" selection-start-column="1" selection-end-line="161" selection-end-column="1" />
+              <folding>
+                <element signature="e#14#113#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file:///usr/local/go/src/text/template/exec.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="157">
+              <caret line="177" column="19" selection-start-line="177" selection-start-column="19" selection-end-line="177" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/klanten/form/index.tmpl">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="100">
+              <caret line="10" column="30" lean-forward="true" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state>
@@ -121,6 +125,11 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>/index</find>
+    </findStrings>
+  </component>
   <component name="GOROOT" path="/usr/local/go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -134,6 +143,8 @@
         <option value="$PROJECT_DIR$/casus/SQL" />
         <option value="$PROJECT_DIR$/studentenadministratie/main.go" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/login/main.go" />
+        <option value="$PROJECT_DIR$/klanten/klanten.go" />
       </list>
     </option>
   </component>
@@ -161,6 +172,22 @@
               <item name="fontys" type="b2602c69:ProjectViewProjectNode" />
               <item name="fontys" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="fontys" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fontys" type="462c0819:PsiDirectoryNode" />
+              <item name="klanten" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fontys" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fontys" type="462c0819:PsiDirectoryNode" />
+              <item name="klanten" type="462c0819:PsiDirectoryNode" />
+              <item name="form" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fontys" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fontys" type="462c0819:PsiDirectoryNode" />
+              <item name="studentenadministratie" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -187,7 +214,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Go Build.print_customer_information">
+  <component name="RunManager" selected="Go Build.go build klanten.go">
     <configuration name="Calc" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="fontys" />
       <working_directory value="$PROJECT_DIR$/" />
@@ -195,6 +222,33 @@
       <parameters value="747 x 884" />
       <kind value="FILE" />
       <filePath value="$PROJECT_DIR$/calculator.go" />
+      <package value="fontys" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build bestelling.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="fontys" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/bestelling/bestelling.go" />
+      <package value="fontys" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build klanten.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="fontys" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/klanten/klanten.go" />
+      <package value="fontys" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="fontys" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/login/main.go" />
       <package value="fontys" />
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
@@ -212,7 +266,17 @@
     <list>
       <item itemvalue="Go Build.print_customer_information" />
       <item itemvalue="Go Build.Calc" />
+      <item itemvalue="Go Build.go build main.go" />
+      <item itemvalue="Go Build.go build klanten.go" />
+      <item itemvalue="Go Build.go build bestelling.go" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.go build klanten.go" />
+        <item itemvalue="Go Build.go build main.go" />
+        <item itemvalue="Go Build.go build bestelling.go" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -225,20 +289,21 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2819063" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.41917807" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.29589042" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32876712" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.32739726" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.23424658" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -274,13 +339,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/studentenadministratie/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Bloks,Rolf R.A. - versie 4/bestelling/bestelling.go">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -305,20 +363,72 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="9" selection-start-column="9" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../github.com/gorilla/mux/mux.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="101">
+          <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bestelling/bestelling.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="182" column="7" lean-forward="true" selection-start-line="182" selection-start-column="5" selection-end-line="182" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/go/src/text/template/helper.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/klanten/form/index.tmpl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="10" column="30" lean-forward="true" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/go/src/text/template/exec.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="177" column="19" selection-start-line="177" selection-start-column="19" selection-end-line="177" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/studentenadministratie/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/login/main.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="116" column="16" lean-forward="true" selection-start-line="116" selection-start-column="16" selection-end-line="116" selection-end-column="16" />
+        <state relative-caret-position="95">
+          <caret line="17" column="30" selection-start-line="17" selection-start-column="15" selection-end-line="17" selection-end-column="30" />
           <folding>
             <element signature="e#14#157#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/klanten/klanten.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="9" selection-start-column="9" selection-end-column="9" />
+        <state relative-caret-position="305">
+          <caret line="161" column="1" lean-forward="true" selection-start-line="161" selection-start-column="1" selection-end-line="161" selection-end-column="1" />
+          <folding>
+            <element signature="e#14#113#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
