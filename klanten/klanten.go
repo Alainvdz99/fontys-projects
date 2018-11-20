@@ -20,17 +20,18 @@ type Klant struct {
 	Brf                              float32
 }
 
-type Verkoper struct {
-	Mnr  int
-	Vanm string
-	Vvnm string
+type Bestelling struct {
+	Bnr, Dlt, Knr, Vkp     int
+	Sts, bsd, Klvnm, Klanm string
+	Bdr                    float32
+	afb					   decimal
 }
 
 // Verbinding maken met de database
 func dbConn() (db *sql.DB) {
 	dbDriver := "mysql"
 	dbUser := "root"
-	dbPass := "Kikker12"
+	dbPass := ""
 	dbName := "vitaintellectdb"
 	db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@/"+dbName)
 	if err != nil {
@@ -161,42 +162,46 @@ func internalPageHandler(response http.ResponseWriter, request *http.Request) {
 	}
 }
 
+/**
+	KLANTEN
+ */
+
 //Index van alle klanten
 func Index(w http.ResponseWriter, request *http.Request) {
 	db := dbConn()
-	//userName := getUserName(request)
-	//selDB, err := db.Query("SELECT k.* FROM klant AS k INNER JOIN bestelling AS b ON b.klantnummer = k.klantnummer WHERE  b.verkoper = (SELECT m.medewerkernummer FROM medewerker AS m WHERE m.voorletters = ?)", userName) // Selecteren en ordenen van de gegevens van de klanten
-	//if err != nil {
-	//	panic(err.Error())
-	//}
-	//klnt := Klant{}
-	//res := []Klant{}
-	//for selDB.Next() {
-	//	var klantnummer, huisnummer, inkomen int
-	//	var naam, voornaam, postcode, huisnummer_toevoeging, geslacht, bloedgroep, rhesusfactor string
-	//	var geboortedatum, kredietregistratie, opleiding, opmerkingen string
-	//	var beroepsrisicofactor float32
-	//	err = selDB.Scan(&klantnummer, &voornaam, &naam, &postcode, &huisnummer, &huisnummer_toevoeging, &geboortedatum, &geslacht, &bloedgroep, &rhesusfactor, &beroepsrisicofactor, &inkomen, &kredietregistratie, &opleiding, &opmerkingen)
-	//	if err != nil {
-	//		panic(err.Error())
-	//	}
-	//	klnt.Knr = klantnummer
-	//	klnt.Nm = naam
-	//	klnt.Vnm = voornaam
-	//	klnt.Pc = postcode
-	//	klnt.Hnr = huisnummer
-	//	klnt.Hnrt = huisnummer_toevoeging
-	//	klnt.Gbd = geboortedatum
-	//	klnt.Gsl = geslacht
-	//	klnt.Blg = bloedgroep
-	//	klnt.Rhf = rhesusfactor
-	//	klnt.Brf = beroepsrisicofactor
-	//	klnt.Ink = inkomen
-	//	klnt.Krg = kredietregistratie
-	//	klnt.Opl = opleiding
-	//	klnt.Opm = opmerkingen
-	//	res = append(res, klnt)
-	//}
+	userName := getUserName(request)
+	selDB, err := db.Query("SELECT k.* FROM klant AS k INNER JOIN bestelling AS b ON b.klantnummer = k.klantnummer WHERE  b.verkoper = (SELECT m.medewerkernummer FROM medewerker AS m WHERE m.voorletters = ?)", userName) // Selecteren en ordenen van de gegevens van de klanten
+	if err != nil {
+		panic(err.Error())
+	}
+	bstl := Bestelling{}
+	res := []Bestelling{}
+	for selDB.Next() {
+		var klantnummer, huisnummer, inkomen int
+		var naam, voornaam, postcode, huisnummer_toevoeging, geslacht, bloedgroep, rhesusfactor string
+		var geboortedatum, kredietregistratie, opleiding, opmerkingen string
+		var beroepsrisicofactor float32
+		err = selDB.Scan(&klantnummer, &voornaam, &naam, &postcode, &huisnummer, &huisnummer_toevoeging, &geboortedatum, &geslacht, &bloedgroep, &rhesusfactor, &beroepsrisicofactor, &inkomen, &kredietregistratie, &opleiding, &opmerkingen)
+		if err != nil {
+			panic(err.Error())
+		}
+		klnt.Knr = klantnummer
+		klnt.Nm = naam
+		klnt.Vnm = voornaam
+		klnt.Pc = postcode
+		klnt.Hnr = huisnummer
+		klnt.Hnrt = huisnummer_toevoeging
+		klnt.Gbd = geboortedatum
+		klnt.Gsl = geslacht
+		klnt.Blg = bloedgroep
+		klnt.Rhf = rhesusfactor
+		klnt.Brf = beroepsrisicofactor
+		klnt.Ink = inkomen
+		klnt.Krg = kredietregistratie
+		klnt.Opl = opleiding
+		klnt.Opm = opmerkingen
+		res = append(res, klnt)
+	}
 	tmpl.ExecuteTemplate(w, "Index", nil)
 	//tmpl.ExecuteTemplate(w, "Index", res)
 	defer db.Close()
@@ -245,45 +250,7 @@ func New(w http.ResponseWriter, r *http.Request) {
 	tmpl.ExecuteTemplate(w, "New", nil)
 }
 
-// De gegevens van een bestaande klant aanpassen
-func Edit(w http.ResponseWriter, r *http.Request) {
-	db := dbConn()
-	nKnr := r.URL.Query().Get("klantnummer")
-	selDB, err := db.Query("SELECT * FROM klant WHERE klantnummer=?", nKnr)
-	if err != nil {
-		panic(err.Error())
-	}
-	klnt := Klant{}
-	for selDB.Next() {
-		var klantnummer, huisnummer, inkomen int
-		var naam, voornaam, postcode, huisnummer_toevoeging, geslacht, bloedgroep, rhesusfactor string
-		var geboortedatum, kredietregistratie, opleiding, opmerkingen string
-		var beroepsrisicofactor float32
-		err = selDB.Scan(&klantnummer, &voornaam, &naam, &postcode, &huisnummer, &huisnummer_toevoeging, &geboortedatum, &geslacht, &bloedgroep, &rhesusfactor, &beroepsrisicofactor, &inkomen, &kredietregistratie, &opleiding, &opmerkingen)
-		if err != nil {
-			panic(err.Error())
-		}
-		klnt.Knr = klantnummer
-		klnt.Nm = naam
-		klnt.Vnm = voornaam
-		klnt.Pc = postcode
-		klnt.Hnr = huisnummer
-		klnt.Hnrt = huisnummer_toevoeging
-		klnt.Gbd = geboortedatum
-		klnt.Gsl = geslacht
-		klnt.Blg = bloedgroep
-		klnt.Rhf = rhesusfactor
-		klnt.Brf = beroepsrisicofactor
-		klnt.Ink = inkomen
-		klnt.Krg = kredietregistratie
-		klnt.Opl = opleiding
-		klnt.Opm = opmerkingen
-	}
-	tmpl.ExecuteTemplate(w, "Edit", klnt)
-	defer db.Close()
-}
-
-// De gegevens toevoegen aan de database
+//  Gegevens klant toevoegen aan de database
 func Insert(w http.ResponseWriter, r *http.Request) {
 	db := dbConn()
 	if r.Method == "POST" {
@@ -313,36 +280,6 @@ func Insert(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/", 301)
 }
 
-// De gegevens veranderen in de database
-func Update(w http.ResponseWriter, r *http.Request) {
-	db := dbConn()
-	if r.Method == "POST" {
-		voornaam := r.FormValue("voornaam")
-		naam := r.FormValue("naam")
-		postcode := r.FormValue("postcode")
-		huisnummer := r.FormValue("huisnummer")
-		huisnummer_toevoeging := r.FormValue("huisnummer_toevoeging")
-		geboortedatum := r.FormValue("geboortedatum")
-		geslacht := r.FormValue("geslacht")
-		bloedgroep := r.FormValue("bloedgroep")
-		rhesusfactor := r.FormValue("rhesusfactor")
-		beroepsrisicofactor := r.FormValue("beroepsrisicofactor")
-		inkomen := r.FormValue("inkomen")
-		kredietregistratie := r.FormValue("kredietregistratie")
-		opleiding := r.FormValue("opleiding")
-		opmerkingen := r.FormValue("opmerkingen")
-		klantnummer := r.FormValue("uid")
-		insForm, err := db.Prepare("UPDATE klant SET voornaam=?, naam=?, postcode=?, huisnummer=?, huisnummer_toevoeging=?, geboortedatum=?, geslacht=?, bloedgroep=?, rhesusfactor=?, beroepsrisicofactor=?, inkomen=?, kredietregistratie=?, opleiding=?, opmerkingen=? WHERE klantnummer=?")
-		if err != nil {
-			panic(err.Error())
-		}
-		insForm.Exec(naam, voornaam, postcode, huisnummer, huisnummer_toevoeging, geboortedatum, geslacht, bloedgroep, rhesusfactor, beroepsrisicofactor, inkomen, kredietregistratie, opleiding, opmerkingen, klantnummer)
-		log.Println("Aangepast: Voornaam: " + voornaam + " | Achternaam: " + naam + " | Geboortedatum: " + geboortedatum)
-	}
-	defer db.Close()
-	http.Redirect(w, r, "/", 301)
-}
-
 // Klant verwijderen uit de database
 func Delete(w http.ResponseWriter, r *http.Request) {
 	db := dbConn()
@@ -355,6 +292,51 @@ func Delete(w http.ResponseWriter, r *http.Request) {
 	log.Println("DELETE")
 	defer db.Close()
 	http.Redirect(w, r, "/", 301)
+}
+
+/**
+	BESTELLINGEN
+ */
+
+//Index van alle bestellingen
+func bestellingIndex(w http.ResponseWriter, request *http.Request) {
+	db := dbConn()
+	userName := getUserName(request)
+	selDB, err := db.Query("SELECT b.* FROM bestelling AS b WHERE b.verkoper =  (SELECT m.medewerkernummer FROM medewerker AS m WHERE m.voorletters = ? )", userName) // Selecteren en ordenen van de gegevens van de klanten
+	if err != nil {
+		panic(err.Error())
+	}
+	klnt := Klant{}
+	res := []Klant{}
+	for selDB.Next() {
+		var bestelnummer, afbetaling_doorlooptijd, klantnummer, verkoper int
+		var status, besteldatum, postcode, huisnummer_toevoeging, geslacht, bloedgroep, rhesusfactor string
+		var geboortedatum, kredietregistratie, opleiding, opmerkingen string
+		var beroepsrisicofactor float32
+		err = selDB.Scan(&klantnummer, &voornaam, &naam, &postcode, &huisnummer, &huisnummer_toevoeging, &geboortedatum, &geslacht, &bloedgroep, &rhesusfactor, &beroepsrisicofactor, &inkomen, &kredietregistratie, &opleiding, &opmerkingen)
+		if err != nil {
+			panic(err.Error())
+		}
+		klnt.Knr = klantnummer
+		klnt.Nm = naam
+		klnt.Vnm = voornaam
+		klnt.Pc = postcode
+		klnt.Hnr = huisnummer
+		klnt.Hnrt = huisnummer_toevoeging
+		klnt.Gbd = geboortedatum
+		klnt.Gsl = geslacht
+		klnt.Blg = bloedgroep
+		klnt.Rhf = rhesusfactor
+		klnt.Brf = beroepsrisicofactor
+		klnt.Ink = inkomen
+		klnt.Krg = kredietregistratie
+		klnt.Opl = opleiding
+		klnt.Opm = opmerkingen
+		res = append(res, klnt)
+	}
+	tmpl.ExecuteTemplate(w, "Index", nil)
+	//tmpl.ExecuteTemplate(w, "Index", res)
+	defer db.Close()
 }
 
 // De gegevens tonen
@@ -372,9 +354,14 @@ func main() {
 	http.HandleFunc("/index", Index)
 	http.HandleFunc("/show", Show)
 	http.HandleFunc("/new", New)
-	http.HandleFunc("/edit", Edit)
 	http.HandleFunc("/insert", Insert)
-	http.HandleFunc("/update", Update)
 	http.HandleFunc("/delete", Delete)
+	// bestellingen
+	http.HandleFunc("/bestelling-index", bestellingIndex)
+	http.HandleFunc("/bestelling-show", bestellingShow)
+	http.HandleFunc("/bestelling-new", bestellingNew)
+	http.HandleFunc("/bestelling-insert", bestellingInsert)
+	http.HandleFunc("/bestelling-delete", bestellingDelete)
+	// Start server
 	http.ListenAndServe(":8080", nil)
 }
